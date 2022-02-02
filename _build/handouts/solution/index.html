@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Guessing Game: Solution | Devmountain Foundations</title>
+
+    <link
+      href="../_static/pygments.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="../_static/devmountain.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+
+    <script src="../_static/pdfobject.min.js"></script>
+  </head>
+  <body>
+    <div id="handouts-container">
+      <header id="page-header">
+        <p id="project-title">Devmountain Foundations</p>
+        <p id="page-title">Guessing Game: Solution</p>
+        <p id="backlink">
+          <a href="/"> &laquo; Back to Homepage </a>
+        </p>
+      </header>
+
+      <nav id="page-toc"><ul>
+<li><a class="reference internal" href="#">Guessing Game: Solution</a><ul>
+<li><a class="reference internal" href="#solution">Solution</a><ul>
+<li><a class="reference internal" href="#notes">Notes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#further-study">Further Study</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+
+      <main id="page-content">  <section class="section" id="guessing-game-solution">
+<h1>Guessing Game: Solution</h1>
+<section class="section" id="solution">
+<h2>Solution</h2>
+<p>Here’s a basic version:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">solution/game.py</span></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;A number-guessing game.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
+<span class="n">tries</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">number</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Howdy, what</span><span class="se">\&#39;</span><span class="s1">s your name?&#39;</span><span class="p">)</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;(type in your name) &#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">, I</span><span class="se">\&#39;</span><span class="s1">m thinking of a number between 1 and 100.&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Can you guess what the number is?&#39;</span><span class="p">)</span>
+
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="n">guess</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Your guess? &#39;</span><span class="p">)</span>
+
+    <span class="c1"># Make sure the guess is actually a number</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">guess</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;&quot;</span><span class="si">{</span><span class="n">guess</span><span class="si">}</span><span class="s1">&quot; is not a valid number, try again.&#39;</span><span class="p">)</span>
+        <span class="k">continue</span>
+
+    <span class="c1"># Make sure the guess is between 1 and 100</span>
+    <span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="n">guess</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please guess a number between 1 and 100&#39;</span><span class="p">)</span>
+        <span class="k">continue</span>
+
+    <span class="n">tries</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># this is equivalent to `tries = tries + 1`</span>
+
+    <span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">number</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Your guess is too low, try again.&#39;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">guess</span> <span class="o">&gt;</span> <span class="n">number</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Your guess is too high, try again.&#39;</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Well done, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;You found my number in </span><span class="si">{</span><span class="n">tries</span><span class="si">}</span><span class="s1"> tries!&#39;</span><span class="p">)</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+</div>
+<section class="section" id="notes">
+<h3>Notes</h3>
+<ul class="simple">
+<li><p>Instead of using <code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">True:</span></code> and a <cite>break</cite> statement, you can write
+<code class="docutils literal notranslate"><span class="pre">while</span> <span class="pre">guess</span> <span class="pre">!=</span> <span class="pre">number:</span></code> which would break automatically when the user
+guessed correctly. This requires initializing <cite>guess</cite> outside of our while
+loop as something that would never accidentally be the random number. You
+could use something like <cite>-1</cite> or <cite>None</cite> for that value.</p></li>
+</ul>
+</section>
+</section>
+<section class="section" id="further-study">
+<h2>Further Study</h2>
+<div class="togglereveal "><details class="admonition-body"><summary></summary><div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">solution/further-study/game.py</span></div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;A more sophisticated number-guessing game.&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
+<span class="n">best_score</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="n">try_limit</span> <span class="o">=</span> <span class="mi">20</span>
+<span class="n">computer_mode</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Howdy, what</span><span class="se">\&#39;</span><span class="s1">s your name?&#39;</span><span class="p">)</span>
+<span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;(type in your name) &#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hi, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">! Would you like to watch the computer guess your number?&#39;</span><span class="p">)</span>
+<span class="n">user_mode_choice</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;[y]es or [n]o: &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+<span class="k">if</span> <span class="n">user_mode_choice</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span> <span class="ow">or</span> <span class="n">user_mode_choice</span> <span class="o">==</span> <span class="s1">&#39;YES&#39;</span><span class="p">:</span>
+    <span class="n">computer_mode</span> <span class="o">=</span> <span class="kc">True</span>
+
+<span class="k">if</span> <span class="ow">not</span> <span class="n">computer_mode</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Set the range of numbers for the game</span>
+        <span class="n">range_min</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">range_max</span> <span class="o">=</span> <span class="mi">100</span>
+
+        <span class="c1"># Ask user for range_min and range_max</span>
+        <span class="n">should_get_range</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+            <span class="s1">&#39;Would you like to set a custom range? &#39;</span>
+        <span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">should_get_range</span> <span class="o">==</span> <span class="s1">&#39;Y&#39;</span> <span class="ow">or</span> <span class="n">should_get_range</span> <span class="o">==</span> <span class="s1">&#39;YES&#39;</span><span class="p">:</span>
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">range_min</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Start range at: &#39;</span><span class="p">))</span>
+
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;That</span><span class="se">\&#39;</span><span class="s1">s not an integer, try again&#39;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="k">break</span>
+
+            <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">user_max</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;End range at: &#39;</span><span class="p">))</span>
+
+                <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;That</span><span class="se">\&#39;</span><span class="s1">s not an integer, try again&#39;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="c1"># Make sure that user_max is larger than range_min</span>
+                <span class="k">if</span> <span class="n">user_max</span> <span class="o">&lt;=</span> <span class="n">range_min</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Please enter a number larger than </span><span class="si">{</span><span class="n">range_min</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+
+                <span class="n">range_max</span> <span class="o">=</span> <span class="n">user_max</span>
+                <span class="k">break</span>
+
+        <span class="n">number</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">range_min</span><span class="p">,</span> <span class="n">range_max</span><span class="p">)</span>
+        <span class="n">tries</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">, I</span><span class="se">\&#39;</span><span class="s1">m thinking of a number between </span><span class="si">{</span><span class="n">range_min</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span>
+              <span class="sa">f</span><span class="s1">&#39;and </span><span class="si">{</span><span class="n">range_max</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Can you guess what the number is?&#39;</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="c1"># Before allowing user to guess, check if they&#39;re within the limit</span>
+            <span class="k">if</span> <span class="n">tries</span> <span class="o">&gt;</span> <span class="n">try_limit</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Whoops! You</span><span class="se">\&#39;</span><span class="s1">ve made too many guesses.&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;GAME OVER.&#39;</span><span class="p">)</span>
+                <span class="k">break</span>
+
+            <span class="c1"># Validate input</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">guess</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Your guess? &#39;</span><span class="p">))</span>
+
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;That</span><span class="se">\&#39;</span><span class="s1">s not an integer, try again&#39;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">guess</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;That</span><span class="se">\&#39;</span><span class="s1">s not between 1 and 100. Try again.&#39;</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+            <span class="c1"># User guessed a valid number; check if they&#39;re within the limit</span>
+            <span class="k">if</span> <span class="n">tries</span> <span class="o">&lt;</span> <span class="n">try_limit</span><span class="p">:</span>
+                <span class="n">tries</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Sorry, you exceeded the max # of tries.&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Game Over :(&#39;</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">guess</span> <span class="o">&lt;</span> <span class="n">number</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Your guess is too low, try again.&#39;</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">guess</span> <span class="o">&gt;</span> <span class="n">number</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Your guess is too high, try again.&#39;</span><span class="p">)</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Well done, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;You found my number in </span><span class="si">{</span><span class="n">tries</span><span class="si">}</span><span class="s1"> tries!&#39;</span><span class="p">)</span>
+                <span class="k">break</span>
+
+        <span class="k">if</span> <span class="n">tries</span> <span class="o">&lt;</span> <span class="n">best_score</span> <span class="ow">or</span> <span class="n">best_score</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">best_score</span> <span class="o">=</span> <span class="n">tries</span>
+
+        <span class="n">answer</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;Do you want to play again? &#39;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s1">&#39;Y&#39;</span> <span class="ow">and</span> <span class="n">answer</span> <span class="o">!=</span> <span class="s1">&#39;YES&#39;</span><span class="p">:</span>
+            <span class="k">break</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Your best score was </span><span class="si">{</span><span class="n">best_score</span><span class="si">}</span><span class="s1">.&#39;</span><span class="p">)</span>
+
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="c1"># Set the range of numbers for the game</span>
+        <span class="n">range_min</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">range_max</span> <span class="o">=</span> <span class="mi">101</span>
+
+        <span class="n">computer_guess</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">tries</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Think of a number between 1 and 100&#39;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;🤖 Beep boop, I will guess your number now...&#39;</span><span class="p">)</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">computer_guess</span> <span class="o">=</span> <span class="p">(</span><span class="n">range_min</span> <span class="o">+</span> <span class="n">range_max</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">tries</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;🤖 Is the number </span><span class="si">{</span><span class="n">computer_guess</span><span class="si">}</span><span class="s1">?&#39;</span><span class="p">)</span>
+
+            <span class="n">user_feedback</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span>
+                <span class="s1">&#39;Is the guess correct, too low, or too high? &#39;</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">user_feedback</span> <span class="o">==</span> <span class="s1">&#39;TOO LOW&#39;</span><span class="p">:</span>
+                <span class="n">range_min</span> <span class="o">=</span> <span class="n">computer_guess</span>
+                <span class="k">continue</span>
+
+            <span class="k">elif</span> <span class="n">user_feedback</span> <span class="o">==</span> <span class="s1">&#39;TOO HIGH&#39;</span><span class="p">:</span>
+                <span class="n">range_max</span> <span class="o">=</span> <span class="n">computer_guess</span>
+                <span class="k">continue</span>
+
+            <span class="k">elif</span> <span class="n">user_feedback</span> <span class="o">==</span> <span class="s1">&#39;CORRECT&#39;</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;🤖 I guessed your number in </span><span class="si">{</span><span class="n">tries</span><span class="si">}</span><span class="s1"> guesses&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;🤖 Let</span><span class="se">\&#39;</span><span class="s1">s play again.&#39;</span><span class="p">)</span>
+                <span class="k">break</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;🤖 I didn</span><span class="se">\&#39;</span><span class="s1">t understand that.&#39;</span><span class="p">)</span>
+                <span class="k">continue</span>
+</pre></div>
+</div>
+</div>
+</details></div></section>
+</section>
+ 
+      </main>
+
+      <footer id="page-footer">
+        <p>&copy; 2021 Devmountain</p>
+      </footer>
+    </div>
+
+    <script src="../_static/main.js"></script>
+      <script src="../_static/jquery.js"></script>
+      <script src="../_static/underscore.js"></script>
+      <script src="../_static/doctools.js"></script>
+  </body>
+</html>

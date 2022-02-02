@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rubric | Devmountain Foundations</title>
+
+    <link
+      href="../_static/pygments.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="../_static/devmountain.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+
+    <script src="../_static/pdfobject.min.js"></script>
+  </head>
+  <body>
+    <div id="handouts-container">
+      <header id="page-header">
+        <p id="project-title">Devmountain Foundations</p>
+        <p id="page-title">Rubric</p>
+        <p id="backlink">
+          <a href="/"> &laquo; Back to Homepage </a>
+        </p>
+      </header>
+
+      <nav id="page-toc"><ul>
+<li><a class="reference internal" href="#">Rubric</a><ul>
+<li><a class="reference internal" href="#goals">Goals</a></li>
+<li><a class="reference internal" href="#length">Length</a></li>
+<li><a class="reference internal" href="#gotchas">Gotchas</a></li>
+<li><a class="reference internal" href="#code-reviews">Code Reviews</a></li>
+<li><a class="reference internal" href="#code-review-1">Code Review 1</a></li>
+<li><a class="reference internal" href="#further-study-code-review-1">Further Study, Code Review 1</a></li>
+<li><a class="reference internal" href="#further-study-code-review-2">Further Study, Code Review 2</a></li>
+<li><a class="reference internal" href="#further-study-code-review-3">Further Study, Code Review 3</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+
+      <main id="page-content">  <section class="section" id="rubric">
+<h1>Rubric</h1>
+<dl class="field-list simple">
+<dt class="field-odd">topics</dt>
+<dd class="field-odd"><p>Git basics and python basics including data types, formatting strings, type conversion, while loops, conditionals, and user input</p>
+</dd>
+<dt class="field-even">further study concepts</dt>
+<dd class="field-even"><p>type checking, counters (in loops)</p>
+</dd>
+<dt class="field-odd">requires</dt>
+<dd class="field-odd"><p>Beginner-level Python, Terminal</p>
+</dd>
+<dt class="field-even">time</dt>
+<dd class="field-even"><p>1-3 hours (intro material takes about 1.5~ hours)</p>
+</dd>
+<dt class="field-odd">authors</dt>
+<dd class="field-odd"><p>Christian Fernandez</p>
+</dd>
+</dl>
+<section class="section" id="goals">
+<h2>Goals</h2>
+<p>Students will create a number guessing game that can be played from the command
+line. This exercise demonstrates input validation, basic Python control
+structures, using the Terminal to run Python scripts, and basic Git commands.</p>
+</section>
+<section class="section" id="length">
+<h2>Length</h2>
+<p>This is an all day exercise. Fastest pair in Summer 2015 finished in 2 hours (including intro material).  Several other finsihed around that time. The slowest pair was about 2.5 hours.</p>
+</section>
+<section class="section" id="gotchas">
+<h2>Gotchas</h2>
+<p>Students may be tempted to skip the intro work because they think it’s an
+optional part of the exercise.</p>
+<p>raw_input does not produce an int.  If every guess is “too high”, that’s probably the problem.</p>
+<p>Some people are making directories called “subl” when given this instruction “Create your project file. ‘subl guessing.py’ will probably get you started. ;)”  Perhaps we should clarify that.</p>
+<p>Potential for an endless while loop if they don’t <code class="docutils literal notranslate"><span class="pre">break</span></code>. Hopefully students
+will remember to <cite>Ctrl-C</cite> in that case, but if they do <cite>Ctrl-Z</cite>, remember to use
+<code class="docutils literal notranslate"><span class="pre">fg</span></code> to pull up their process.</p>
+<p>Git is scary, I have few suggestions for this. Try to act like it’s no big deal
+while maintaining caution around using <cite>git reset –hard</cite></p>
+<p>Further Study: <code class="docutils literal notranslate"><span class="pre">try</span></code> and <code class="docutils literal notranslate"><span class="pre">except</span></code> for converting to int is tricky. Have students
+google “Errors and Exceptions in Python” to get the docs.python.org page. Have
+them read it.</p>
+</section>
+<section class="section" id="code-reviews">
+<h2>Code Reviews</h2>
+</section>
+<section class="section" id="code-review-1">
+<h2>Code Review 1</h2>
+<p>Students have finished creating guessing game that:</p>
+<ul class="simple">
+<li><p>Asks for user’s name</p></li>
+<li><p>Greets user and prompts them to enter a number</p></li>
+<li><p>Cycles through until the user guesses the right number (giving hints about whether the guess is too high or too low)</p></li>
+<li><p>ends when the user guesses the right number</p></li>
+</ul>
+<p>They have learned about the purpose of a “main loop.” They’ve also been using git and were asked to do a git reset –hard.</p>
+<p>Asked to use/look into the Python <strong>int function</strong> and <strong>random module</strong></p>
+<p>Check in about pair programming – who was last driving, who was navigating?</p>
+<p>Other things to check/ask about:</p>
+<ul class="simple">
+<li><p>randint(1, 100) – includes the 2nd number given, as opposed to functions like range() that go up to but not including the second argument.</p></li>
+<li><p>different types of string formatting (.format(), %s, string concatenation)</p></li>
+</ul>
+</section>
+<section class="section" id="further-study-code-review-1">
+<h2>Further Study, Code Review 1</h2>
+<p>If the user inputs a number that isn’t between 1-100 as requested, mock them for their crimes and ask them to enter a valid number.</p>
+</section>
+<section class="section" id="further-study-code-review-2">
+<h2>Further Study, Code Review 2</h2>
+<p>If the user inputs something that is not a number, mock them for their crimes and ask them to enter a valid number. Hint: a good way to do this is to learn about Python’s try and except statements.</p>
+<ul class="simple">
+<li><p>Did students put a specific error in their except clause? (ValueError)? How did they figure out it was a ValueError?</p></li>
+<li><p>Ask about how try and except work. What did they wrap in their try statement and whatw as in the except statement?</p></li>
+</ul>
+</section>
+<section class="section" id="further-study-code-review-3">
+<h2>Further Study, Code Review 3</h2>
+<p>Ask the user if they would like to play again and restart the game rather than exiting.</p>
+<ul class="simple">
+<li><p>Break and continue statements</p></li>
+</ul>
+</section>
+</section>
+ 
+      </main>
+
+      <footer id="page-footer">
+        <p>&copy; 2021 Devmountain</p>
+      </footer>
+    </div>
+
+    <script src="../_static/main.js"></script>
+      <script src="../_static/jquery.js"></script>
+      <script src="../_static/underscore.js"></script>
+      <script src="../_static/doctools.js"></script>
+  </body>
+</html>

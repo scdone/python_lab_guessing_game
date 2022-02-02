@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Guessing Game | Devmountain Foundations</title>
+
+    <link
+      href="_static/pygments.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link href="_static/devmountain.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" type="text/css" href="_static/graphviz.css" />
+
+    <script src="_static/pdfobject.min.js"></script>
+  </head>
+  <body>
+    <div id="handouts-container">
+      <header id="page-header">
+        <p id="project-title">Devmountain Foundations</p>
+        <p id="page-title">Guessing Game</p>
+        <p id="backlink">
+          <a href="/"> &laquo; Back to Homepage </a>
+        </p>
+      </header>
+
+      <nav id="page-toc"><ul>
+<li><a class="reference internal" href="#">Guessing Game</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#setup">Setup</a></li>
+<li><a class="reference internal" href="#time-to-build">Time To Build</a></li>
+<li><a class="reference internal" href="#create-a-guessing-game">Create a Guessing Game</a><ul>
+<li><a class="reference internal" href="#about-the-guessing-game">About the Guessing Game</a></li>
+<li><a class="reference internal" href="#gitting-into-git">Gitting into Git</a><ul>
+<li><a class="reference internal" href="#initialize-git">Initialize Git</a></li>
+<li><a class="reference internal" href="#create-an-initial-commit">Create an Initial Commit</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#greet-the-player">Greet the Player</a><ul>
+<li><a class="reference internal" href="#commit-a-new-feature">Commit a New Feature</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#get-the-player-s-name">Get the Player’s Name</a></li>
+<li><a class="reference internal" href="#choose-a-random-number">Choose a Random Number</a></li>
+<li><a class="reference internal" href="#keep-going">Keep Going!</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#check-for-faulty-user-input">Check for Faulty User Input</a><ul>
+<li><a class="reference internal" href="#confirm-that-the-user-s-guess-falls-within-your-range">Confirm that the User’s Guess Falls Within Your Range</a></li>
+<li><a class="reference internal" href="#make-sure-the-user-s-guess-is-an-integer">Make Sure the User’s Guess is an Integer</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#further-study">Further Study</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+
+      <main id="page-content">  <section class="section" id="guessing-game">
+<h1>Guessing Game</h1>
+<section class="section" id="introduction">
+<h2>Introduction</h2>
+<p>This exercise will show you how to write a command line application
+that allows users to play a “guess my number” game.</p>
+</section>
+<section class="section" id="setup">
+<h2>Setup</h2>
+<p>First, download the materials for this exercise from Frodo.</p>
+<p>The folder you downloaded contains one file — <cite>game.py</cite>. Let’s get the lay of the land
+and see what it does.</p>
+<p>One way to get a feel for what a Python file does is to run it!</p>
+<pre class="console literal-block">$ <span class="cmd">python game.py</span></pre>
+<p>…nothing happened! What gives?</p>
+<p>A convenient, quick way to check out a file is to output its contents to the
+terminal. That way, you don’t have to open another application just to skim
+through the code in a file (also, it’s good practice):</p>
+<pre class="console literal-block">$ <span class="cmd">cat game.py</span>
+&quot;&quot;&quot;A number-guessing game.&quot;&quot;&quot;
+
+# Put your code here</pre>
+<p><em>Now</em> it makes sense that nothing happened when we tried to run <cite>game.py</cite>.
+The file contains nothing but comments!</p>
+<div class="admonition note">
+<p class="admonition-title">About <cite>cat</cite></p>
+<div class="admonition-body docutils container">
+<p><cite>cat</cite> is short for <cite>concatenate</cite>. It concatenates the data in a file to the
+terminal.</p>
+</div>
+</div>
+<p>Lastly, open <cite>game.py</cite> in your text editor.</p>
+</section>
+<section class="section" id="time-to-build">
+<h2>Time To Build</h2>
+<p>In your text editor, add a print statement to <cite>game.py</cite>. You can print whatever you
+want (you’ll remove this line of code later). Remember to save your file.
+Your code should look something like this:</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">game.py</span></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;A number-guessing game.&quot;&quot;&quot;</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;hi&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now run your file!</p>
+<pre class="console literal-block">$ <span class="cmd">python game.py</span></pre>
+<p>That’s your basic development workflow! You’ll always:</p>
+<ul class="simple">
+<li><p>Open the files you want to edit in a text editor</p></li>
+<li><p>Add code, save your changes</p></li>
+<li><p>Run your file to make sure it works</p></li>
+</ul>
+</section>
+<section class="section" id="create-a-guessing-game">
+<h2>Create a Guessing Game</h2>
+<section class="section" id="about-the-guessing-game">
+<h3>About the Guessing Game</h3>
+<p>For the rest of this exercise, you’ll write a program in the <cite>game.py</cite> file that
+plays the classic number guessing game. The game will work like this:</p>
+<ul class="simple">
+<li><p>The computer will choose a random number between 1–100 and ask the user to
+guess the number</p></li>
+<li><p>Once the user guesses, the computer will tell the user if their guess was too
+high or too low</p></li>
+<li><p>The game is over once the user guesses the computer’s number. When the game is
+over, the computer the total number of guesses the user made before getting
+the right answer.</p></li>
+</ul>
+<p>Here’s the terminal output for an example game:</p>
+<pre class="console literal-block">$ <span class="cmd">python3 game.py</span>
+Howdy, what's your name?
+(type in your name) <span class="cmd">Jessica</span>
+Jessica, I'm thinking of a number between 1 and 100.
+Try to guess my number.
+Your guess? <span class="cmd">50</span>
+Your guess is too low, try again.
+Your guess? <span class="cmd">80</span>
+Your guess is too high, try again.
+Your guess? <span class="cmd">60</span>
+Your guess is too low, try again.
+Your guess? <span class="cmd">70</span>
+Your guess is too high, try again.
+Your guess? <span class="cmd">63</span>
+Your guess is too low, try again.
+Your guess? <span class="cmd">64</span>
+Your guess is too low, try again.
+Your guess? <span class="cmd">67</span>
+Your guess is too low, try again.
+Your guess? <span class="cmd">69</span>
+Your guess is too high, try again.
+Your guess? <span class="cmd">68</span>
+Well done, Jessica! You found my number in 9 tries!</pre>
+<p>Here’s a rough pseudocode outline of the program that gave this output:</p>
+<pre class="literal-block">greet player
+get player name
+choose random number between 1 and 100
+<em>repeat forever:</em>
+    get guess
+    if guess is incorrect:
+        give hint
+        increase number of guesses
+    else:
+        congratulate player</pre>
+</section>
+<section class="section" id="gitting-into-git">
+<h3>Gitting into Git</h3>
+<p>Git is an open-source software used for version control. Other version control
+technologies you may be familiar with are the <cite>Track Changes</cite> feature in
+Microsoft Word or <cite>See version history</cite> in Google Docs. Version control software
+takes snapshots of a document or documents as it changes over time. Then, it
+builds a timeline and allows you to jump to different snapshots — different
+<em>versions</em> — of the document(s).</p>
+<p>Unlike with Google Docs and Microsoft Word where you can only track changes to
+one document at a time, Git allows you to track changes that have occurred
+in all files and directories that belong to one project. It’s not exclusive to
+tracking changes in code — it works with <em>all</em> file formats including images.</p>
+<p>The other major difference between version control software for developers vs.
+software for non-developers is that — while Google Docs will create snapshots
+automatically for you — you’re in control of taking snapshots. In Git,
+snapshots are called <cite>commits</cite>.</p>
+<p>Every time you commit your code, you’re preserving a snapshot in
+time. If you make a change you don’t like or mess something up, you can
+roll back to a previous commit. For those of you who play adventure games,
+the motto “Save Early, Save Often” should come to mind.</p>
+<p>The following instructions will show you how to turn a regular project directory
+into a Git <cite>repository</cite>. In Git, a repository is a collection of files and
+directories. In other words, it’s a project directory where you’ve activated
+Git.</p>
+<section class="section" id="initialize-git">
+<h4>Initialize Git</h4>
+<p>Before you can start using Git, you’ll need to turn your boring, normal project
+directory into a Git repository! Make sure you’re in the folder <cite>guessing-game/</cite>,
+then run the command below:</p>
+<pre class="console literal-block">$ <span class="cmd">git init</span></pre>
+<p>This will “activate” Git in your working directory! It sounds wild, but all
+that’s happening here is that Git created a hidden directory called <cite>.git</cite> in
+your working directory. You can see it for yourself by outputting all files —
+including hidden ones — in the terminal with <cite>ls</cite>:</p>
+<pre class="console literal-block">$ <span class="cmd">ls -a</span></pre>
+</section>
+<section class="section" id="create-an-initial-commit">
+<h4>Create an Initial Commit</h4>
+<p>Now you’re ready to start using Git. Whenever you start a lab, you should make
+an initial commit <em>before</em> you write any of your own code. That way you’ll have
+a snapshot of what your exercise materials looked like when you recieved them
+in case you ever need to go back to the beginning.</p>
+<p>Before you make your first commit, check the status of your repository:</p>
+<pre class="console literal-block">$ <span class="cmd">git status</span>
+On branch main
+
+No commits yet
+
+Untracked files:
+  (use &quot;git add &lt;file&gt;...&quot; to include in what will be committed)
+        <span class="red">game.py</span>
+
+nothing added to commit but untracked files present (use &quot;git add&quot; to track)</pre>
+<p>The message above tells us that Git isn’t tracking changes in <cite>game.py</cite>, which
+means we won’t be able to record any snapshots of it. Tell Git to track
+<cite>game.py</cite> with <cite>git add</cite>:</p>
+<pre class="console literal-block">$ <span class="cmd">git add game.py</span></pre>
+<p>Run the <cite>git status</cite> command again. The status message should change:</p>
+<pre class="console literal-block">$ <span class="cmd">git status</span>
+On branch main
+
+No commits yet
+
+Changes to be committed:
+  (use &quot;git rm --cached &lt;file&gt;...&quot; to unstage)
+        <span class="green">new file:   game.py</span></pre>
+<p><cite>game.py</cite> is now <cite>staged</cite> which means it’s ready and waiting for you to make
+a commit. Finally! You can make that initial commit by running:</p>
+<pre class="console literal-block">$ <span class="cmd">git commit -a -m &quot;Initial commit&quot;</span>
+[main (root-commit) 0734f92] Initial commmit
+ 1 file changed, 3 insertions(+)
+ create mode 100644 game.py</pre>
+<p>Before making further changes, use the <cite>git status</cite> command again. Git should
+tell you that your working tree is clean — this means there are no other
+changes or files to commit.</p>
+<pre class="console literal-block">$ <span class="cmd">git status</span>
+On branch main
+nothing to commit, working tree clean</pre>
+<p>Sometimes, you’ll want to check the history of your commits to see what
+changes you’ve made. Try checking Git’s logs now. Press the <cite>q</cite> key when you’re
+finished reading your logs:</p>
+<pre class="console literal-block">$ <span class="cmd">git log</span>
+<span class="gray">(your previous commit messages)</span></pre>
+<p>Write descriptive commit messages, and this log will be an invaluable tool when
+you need to roll back to a previous state.</p>
+<p>Let’s do this workflow one more time — except, this time, you’ll make a commit
+for code that you’ll have written and added to <cite>game.py</cite>. In the next section.
+you’ll start by adding code to greet the player.</p>
+</section>
+</section>
+<section class="section" id="greet-the-player">
+<h3>Greet the Player</h3>
+<p>The first feature to implement is the greeting:</p>
+<ul class="simple">
+<li><p>In VS Code, add code to <cite>game.py</cite> that displays a greeting to the player</p></li>
+<li><p>Since you’ve added new code, run it to test that it works</p></li>
+<li><p>If everything works and there are no errors, it’s time to commit your code!</p></li>
+</ul>
+<section class="section" id="commit-a-new-feature">
+<h4>Commit a New Feature</h4>
+<p>Before you do <em>anything</em> Git-related, you should always check the status of your
+repository:</p>
+<pre class="console literal-block">$ <span class="cmd">git status</span>
+On branch main
+Changes not staged for commit:
+  (use &quot;git add &lt;file&gt;...&quot; to update what will be committed)
+  (use &quot;git restore &lt;file&gt;...&quot; to discard changes in working directory)
+        <span class="red">modified:   game.py</span>
+
+no changes added to commit (use &quot;git add&quot; and/or &quot;git commit -a&quot;)</pre>
+<p>The message above tells us that Git is tracking <cite>game.py</cite> and it has noticed
+that <cite>game.py</cite> has changed.</p>
+<p>You’re ready to make another commit! You can make commits as often as you’d
+like, but you should <em>always</em> commit after you’ve added more code that <em>works</em>.
+If you make this a habit, you’ll always have snapshots of working code to
+rollback to. You should also write a brief but informative commit message to
+describe the changes you’ve just made:</p>
+<pre class="console literal-block">$ <span class="cmd">git commit -a -m &quot;Display player greeting&quot;</span></pre>
+<p>Now that your working code for greeting the player is safely checked into Git,
+let’s move on to the next feature.</p>
+<div class="admonition note">
+<p class="admonition-title">Coming up — using GitHub to share code</p>
+<div class="admonition-body docutils container">
+<p>Later, we’ll show you how to make the code you work on while you’re pair
+programming available to both you and your pair!</p>
+</div>
+</div>
+</section>
+</section>
+<section class="section" id="get-the-player-s-name">
+<h3>Get the Player’s Name</h3>
+<p>After “greet player,” our pseudocode outline says “get player name”.</p>
+<ul class="simple">
+<li><p>Write code in <cite>game.py</cite> that get the player’s name and save it to a variable</p></li>
+<li><p>Run your code to test it</p></li>
+<li><p>Once everything works, make another commit. Remember to check Git’s status
+before committing.</p></li>
+</ul>
+<p>As you get more comfortable with Git, you won’t need to do a <cite>git status</cite> at
+every step. We’re only having you do that here so you can see what’s happening
+at each step and get used to the messages that Git returns. But do commit
+early, commit often, and when in doubt, use <cite>git status</cite> and <cite>git log</cite> to
+confirm that reality is what you think it is.</p>
+<p>Repeat this process for the remaining steps in the pseudocode outline, testing
+your code at each step. Whenever you have the code for a step working, commit
+it. The next thing you’ll do is choose a random number.</p>
+</section>
+<section class="section" id="choose-a-random-number">
+<h3>Choose a Random Number</h3>
+<p>Python comes with a <cite>random</cite> module that contains functions for generating
+random numbers. To access the code in a module, all you have to do is import
+it. You can put <cite>import</cite> statements anywhere, but it’s a good practice to put it
+at the top of your file like this:</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">game.py</span></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;A number-guessing game.&quot;&quot;&quot;</span>
+
+<span class="hll"><span class="kn">import</span> <span class="nn">random</span>
+</span>
+<span class="c1"># (...snippet)</span>
+</pre></div>
+</div>
+</div>
+<p>To import any module, all you have to do is write <code class="docutils literal notranslate"><span class="pre">import</span></code> followed by the
+name of the module. After that, you can use any function included in the module
+like so:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">random</span><span class="o">.</span><span class="n">function_name</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Alternatively, if you know the name of the exact function you want to use, you
+can import that specific function like so:</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">game.py</span></div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="sd">&quot;&quot;&quot;A number-guessing game.&quot;&quot;&quot;</span>
+
+<span class="hll"><span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">function_name</span>
+</span>
+<span class="c1"># (...snippet)</span>
+</pre></div>
+</div>
+</div>
+<p>Using the syntax above, you’ll be able to omit the module name when you
+call <cite>function_name</cite>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">function_name</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now that you know how to import functions from modules, check out the official
+docs on the <cite>random</cite> module here: <a class="reference external" href="https://docs.python.org/3.6/library/random.html" rel="noreferrer noopener" target="_blank">The Python Standard Library: random</a>.
+Find a function that’ll help you generate a random number between 1–100.</p>
+</section>
+<section class="section" id="keep-going">
+<h3>Keep Going!</h3>
+<p>Keep adding code to <cite>game.py</cite>!</p>
+<p>Along the way, you may need to learn about <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#numeric-types-int-float-complex" rel="noreferrer noopener" target="_blank">how to convert something to an
+integer</a>.
+If you’re having trouble with this, check the hint below.</p>
+<div class="admonition hint">
+<p class="admonition-title">Turning stuff into numbers</p>
+<details class="admonition-body"><summary></summary><div class="admonition-body docutils container">
+<p>If you check out the <a class="reference external" href="https://docs.python.org/3.6/library/stdtypes.html#numeric-types-int-float-complex" rel="noreferrer noopener" target="_blank">chapter of the Python docs on numeric types</a>
+that we linked above, you’ll see a table of operations after the 4th
+paragraph. Here’s an excerpt from that table:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 29%" />
+<col style="width: 71%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Operation</p></th>
+<th class="head"><p>Result</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">int(x)</span></code></p></td>
+<td><p><cite>x</cite> converted to an integer</p></td>
+</tr>
+</tbody>
+</table>
+<p>So if we want to convert something to an integer, all we have to do is call
+the <cite>int</cite> function. For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">num</span> <span class="o">=</span> <span class="s1">&#39;100&#39;</span>  <span class="c1"># this is not a number, it&#39;s a string</span>
+<span class="hll"><span class="gp">&gt;&gt;&gt; </span><span class="n">num</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">num</span><span class="p">)</span>
+</span><span class="gp">&gt;&gt;&gt; </span><span class="n">num</span>
+<span class="go">100</span>
+</pre></div>
+</div>
+</div>
+</details></div>
+<p>You also might need to find out how to use the <cite>break</cite> statement: <a class="reference external" href="https://docs.python.org/3.6/tutorial/controlflow.html?highlight=break#break-and-continue-statements-and-else-clauses-on-loops" rel="noreferrer noopener" target="_blank">The Python
+Tutorial: break and continue Statements</a></p>
+<p>Once you have a game that…</p>
+<ul class="simple">
+<li><p>Asks for the user’s name</p></li>
+<li><p>Greets the user and prompts them to guess a number</p></li>
+<li><p>Cycles through until the user guesses the right number</p></li>
+<li><p>Ends when the user guesses the right number and displays the number of guesses
+that the user made</p></li>
+</ul>
+<p>… feel free to move on to the next sections.</p>
+</section>
+</section>
+<section class="section" id="check-for-faulty-user-input">
+<h2>Check for Faulty User Input</h2>
+<section class="section" id="confirm-that-the-user-s-guess-falls-within-your-range">
+<h3>Confirm that the User’s Guess Falls Within Your Range</h3>
+<p>If the user inputs a number that isn’t between 1-100 as requested,
+mock them for their crimes and ask them to enter a valid number.</p>
+</section>
+<section class="section" id="make-sure-the-user-s-guess-is-an-integer">
+<h3>Make Sure the User’s Guess is an Integer</h3>
+<p>If the user inputs something that is not an integer, mock them for their crimes
+and ask them to enter a valid integer. If you’re not sure where to start with
+this feature, check the hint below.</p>
+<div class="admonition hint">
+<p class="admonition-title">Validating user input</p>
+<details class="admonition-body"><summary></summary><div class="admonition-body docutils container">
+<p>A good way forward is to learn what happens when you <em>don’t</em> enter a number.
+Then, learn about Python’s <cite>try</cite> and <cite>except</cite> statements.</p>
+</div>
+</details></div>
+</section>
+</section>
+<section class="section" id="further-study">
+<h2>Further Study</h2>
+<p>If you have more time, you can <a class="reference external" href="further-study">click here to continue to the Further Study</a></p>
+</section>
+</section>
+ 
+      </main>
+
+      <footer id="page-footer">
+        <p>&copy; 2021 Devmountain</p>
+      </footer>
+    </div>
+
+    <script src="_static/main.js"></script>
+      <script src="_static/jquery.js"></script>
+      <script src="_static/underscore.js"></script>
+      <script src="_static/doctools.js"></script>
+  </body>
+</html>
