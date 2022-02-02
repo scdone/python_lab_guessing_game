@@ -3,7 +3,7 @@
 import random
 guess = None
 computer_number = random.randint(0, 100)
-count = 0
+count = 1
 
 
 def guessing_game_start():
@@ -22,7 +22,6 @@ def guess_again():
     global computer_number
     global count
 
-
     if 0 <= guess <= 100 and guess > computer_number and guess % 1 == 0:
         guess = int(input("Your guess is too high. Try again. "))
         count += 1
@@ -34,8 +33,7 @@ def guess_again():
         guess_again()
     
     elif guess == computer_number:
-        print(f"Congrats! You won in {count} guesses.")
-        return
+        return print(f"Congrats! You won in {count} guesses.")
 
     else:
         guess = int(input("Your guess must be a whole number from 0 - 100, inclusive. Try again."))
