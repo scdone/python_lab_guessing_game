@@ -33,7 +33,7 @@ def guess_again():
         guess_again()
     
     elif guess == computer_number:
-        return print(f"Congrats! You won in {count} guesses.")
+        return print(f"Ding, Ding, Ding! You won in {count} guesses.")
 
     else:
         guess = int(input("Your guess must be a whole number from 0 - 100, inclusive. Try again."))
